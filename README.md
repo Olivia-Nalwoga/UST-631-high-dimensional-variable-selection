@@ -94,9 +94,11 @@ Potential limitations include:
 
 ## Repository Structure
 
+```
 UST-631-high-dimensional-variable-selection/
 ├── .gitignore        # Prevents committing data files
 ├── README.md         # Project documentation
 ├── analysis.ipynb    # Main analysis notebook
 └── data/
     └── README.md     # Instructions for accessing data
+```
