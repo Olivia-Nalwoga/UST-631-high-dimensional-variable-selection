@@ -44,7 +44,7 @@ This question matters because high-dimensional datasets often contain redundant 
 
 - A full predictive model is fit using all available predictors.
 - A reduced model is fit using variable selection techniques.
-- **Test statistic:** Difference in predictive performance between the full and reduced models.
+- **Test statistic:** Difference in prediction error (e.g., mean squared error) between the full and reduced models.
 - **Permutation test:** Used to simulate the null distribution by breaking the association between predictors and the outcome.
 - **Bootstrap estimation:** Used to assess uncertainty and stability of selected predictors.
 - The Central Limit Theorem does not apply directly to variable selection stability metrics, motivating the use of resampling methods.
