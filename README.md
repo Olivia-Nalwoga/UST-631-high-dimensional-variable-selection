@@ -47,7 +47,7 @@ This question matters because high-dimensional datasets often contain redundant 
 - **Test statistic:** Difference in prediction error (e.g., mean squared error) between the full and reduced models.
 - **Permutation test:** Used to simulate the null distribution by breaking the association between predictors and the outcome.
 - **Bootstrap estimation:** Used to assess uncertainty and stability of selected predictors.
-- - **Why the CLT does not apply:**
+- **Why the CLT does not apply:**
   This analysis involves high-dimensional predictors and variable selection
   procedures that produce statistics with discrete and non-normal sampling
   distributions. Therefore, resampling-based methods are more appropriate than
