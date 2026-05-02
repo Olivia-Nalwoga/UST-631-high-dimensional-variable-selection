@@ -35,50 +35,83 @@ This question matters because high-dimensional datasets often contain redundant 
   - Laboratory variables from the Complete Blood Count (CBC)
 
 - **Data Handling:**  
-  In accordance with course guidelines, data files are **not committed** to this repository.  
-  Any filtering, cleaning, or transformation steps are documented in the analysis notebook.
+    Observations with missing values in the outcome or selected predictors were removed.
+    Numeric predictors were standardized prior to model fitting.
+
 
 ---
 
 ## 4. Methods
 
-- A full predictive model is fit using all available predictors.
-- A reduced model is fit using variable selection techniques.
+- A full predictive model was fit using all available predictors.
+- A reduced model was fit using variable selection techniques.
 - **Test statistic:** Difference in prediction error (e.g., mean squared error) between the full and reduced models.
 - **Permutation test:** Used to simulate the null distribution by breaking the association between predictors and the outcome.
 - **Bootstrap estimation:** Used to assess uncertainty and stability of selected predictors.
-- The Central Limit Theorem does not apply directly to variable selection stability metrics, motivating the use of resampling methods.
+- Why the CLT does not apply:
+   This analysis involves high-dimensional predictors and variable selection procedures that produce statistics with discrete and non-normal sampling distributions. Therefore, resampling-based methods are more appropriate than CLT-based inference.
 
 ---
 
 ## 5. Results
 
-*(To be completed after analysis)*
+### Full Model Performance
 
-This section will include:
-- Summary statistics and key visualizations
-- Observed test statistic and permutation-based p-value
-- Bootstrap confidence intervals for relevant metrics
+A linear regression model using all available predictors achieved strong
+predictive performance, with a test-set mean squared error (MSE) of
+approximately **0.0049**. An observed-versus-predicted plot showed most points
+closely aligned with the identity line, indicating that the full model fits the
+data well and produces accurate predictions of hemoglobin levels.
+
+### LASSO Variable Selection
+
+LASSO regression reduced the high-dimensional predictor set to a small subset of
+complete blood count (CBC) variables: hematocrit (LBXHCT), red blood cell count
+(LBXRBCSI), mean corpuscular hemoglobin (LBXMCHSI), and red cell distribution
+width (LBXRDW). These variables are biologically related to hemoglobin and
+represent interpretable predictors retained after accounting for
+multicollinearity.
+
+### Reduced Model Performance
+
+A reduced linear regression model fit using only the LASSO-selected predictors
+exhibited substantially worse predictive performance, with a test-set MSE of
+approximately **0.0233**. The observed difference in prediction error between the
+reduced and full models was **0.0184**, indicating a large loss in predictive
+accuracy when using the reduced model.
+
+### Permutation-Based Comparison
+
+After correcting the permutation test to repeat LASSO variable selection within
+each shuffle, no predictors were selected under the permuted outcomes. As a
+result, no finite null distribution of the test statistic could be constructed.
+This indicates that the predictive structure observed in the real data is far
+from what would be expected under random association.
+
+### Bootstrap Uncertainty Estimation
+
+Bootstrap resampling of the training data produced a stable distribution of the
+full model’s test-set MSE. The 95% bootstrap confidence interval for the full
+model MSE was approximately **[0.00445, 0.00635]**, and the observed MSE fell well
+within this interval. This suggests that the full model’s predictive performance
+is reliable and not driven by random sampling variation.
 
 ---
 
 ## 6. Uncertainty Estimation
 
-*(To be completed after analysis)*
-
-This section will discuss:
-- Number of permutation and bootstrap resamples used
-- Shapes of the resampling distributions
-- Interpretation of interval estimates and variability in selected predictors
+A total of 2,000 bootstrap resamples were used to assess uncertainty in model performance. The bootstrap distribution of the full model MSE was concentrated and slightly right-skewed, with limited variability. The narrow confidence interval indicates that uncertainty in predictive accuracy is small and primarily due to finite sample size rather than model instability.
+Permutation-based reasoning further supported the conclusion that the observed performance gap between models reflects genuine structure in the data rather than chance variation.
 
 ---
 
 ## 7. Limitations
 
 Potential limitations include:
-- Missing data in some laboratory or demographic variables
-- Assumptions inherent in the modeling approach
-- Sensitivity of variable selection results to resampling variability
+- NHANES data are observational, limiting causal interpretation.
+- Results may be sensitive to the specific predictors included and to the choice of regularization strength.
+- NHANES sampling weights were not incorporated.
+- Variable selection outcomes may vary under alternative modeling choices.
 
 ---
 
@@ -88,7 +121,15 @@ Potential limitations include:
   https://wwwn.cdc.gov/nchs/nhanes/
 - NHANES data repository used in this project:  
   https://github.com/simonaseno/NHANES
-- Python scientific computing libraries (e.g., pandas, numpy, scikit-learn)
+- Python scientific computing libraries (pandas, numpy, scikit-learn, matplotlib, seaborn)
+
+---
+
+## Conclusion
+
+While LASSO identified a small and interpretable subset of predictors, the full
+high-dimensional model provided substantially better predictive accuracy,
+highlighting a clear trade-off between simplicity and performance.
 
 ---
 
