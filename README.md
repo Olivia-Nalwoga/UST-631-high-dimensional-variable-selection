@@ -94,7 +94,7 @@ from what would be expected under random association.
 
 Bootstrap resampling of the training data produced a stable distribution of the
 full model’s test-set MSE. The 95% bootstrap confidence interval for the full
-model MSE was approximately **[0.00445, 0.00635]**, and the observed MSE fell well
+model MSE was approximately **[0.00445, 0.00636]**, and the observed MSE fell well
 within this interval. This suggests that the full model’s predictive performance
 is reliable and not driven by random sampling variation.
 
