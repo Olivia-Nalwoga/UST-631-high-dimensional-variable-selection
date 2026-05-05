@@ -2,7 +2,7 @@
 
 ## 1. Research Question
 
-Can a reduced subset of health-related variables predict hemoglobin levels almost as well as a full, high-dimensional set of predictors?
+Can a reduced subset of hematologic and demographic variables predict hemoglobin levels nearly as well as a full model that includes all available predictors?
 
 This question matters because high-dimensional datasets often contain redundant or unstable variables. Understanding whether simpler models perform comparably can improve interpretability and reproducibility in statistical analysis.
 
@@ -67,34 +67,33 @@ data well and produces accurate predictions of hemoglobin levels.
 
 ### LASSO Variable Selection
 
-LASSO regression reduced the high-dimensional predictor set to a small subset of
-complete blood count (CBC) variables: hematocrit (LBXHCT), red blood cell count
-(LBXRBCSI), mean corpuscular hemoglobin (LBXMCHSI), and red cell distribution
-width (LBXRDW). These variables are biologically related to hemoglobin and
-represent interpretable predictors retained after accounting for
-multicollinearity.
+LASSO identified a smaller and more interpretable subset of predictors, the reduced model achieved predictive performance comparable to the full model. 
+The permutation test indicates that any observed difference in performance is not statistically significant, highlighting a trade-off between simplicity and interpretability without a clear loss in accuracy.
 
 ### Reduced Model Performance
 
-A reduced linear regression model fit using only the LASSO-selected predictors
-exhibited substantially worse predictive performance, with a test-set MSE of
-approximately **0.0233**. The observed difference in prediction error between the
-reduced and full models was **0.0184**, indicating a large loss in predictive
+A reduced linear regression model fit using only the LASSO-selected predictorsexhibited substantially worse predictive performance, with a test-set MSE ofapproximately **0.0233**. The observed difference in prediction error between thereduced and full models was **0.0184**, indicating a large loss in predictive
 accuracy when using the reduced model.
 
 ### Permutation-Based Comparison
 
-After correcting the permutation test to repeat LASSO variable selection within
-each shuffle, no predictors were selected under the permuted outcomes. As a
-result, no finite null distribution of the test statistic could be constructed.
-This indicates that the predictive structure observed in the real data is far
-from what would be expected under random association.
+The permutation test produced a p-value of 0.143, which exceeds the 0.05 
+significance level. Therefore, we fail to reject the null hypothesis that the 
+observed difference in predictive performance between the reduced and full models 
+could have occurred by chance.
+
+This suggests that the reduced model does not exhibit a statistically significant 
+loss in predictive accuracy relative to the full model.
+
+Bootstrap analysis indicates that the full model’s test-set MSE is stable across 
+resamples, suggesting that the model’s performance is not driven by sampling variability.
+
 
 ### Bootstrap Uncertainty Estimation
 
 Bootstrap resampling of the training data produced a stable distribution of the
 full model’s test-set MSE. The 95% bootstrap confidence interval for the full
-model MSE was approximately **[0.00445, 0.00636]**, and the observed MSE fell well
+model MSE was approximately **[0.00438, 0.00631]**, and the observed MSE fell well
 within this interval. This suggests that the full model’s predictive performance
 is reliable and not driven by random sampling variation.
 
