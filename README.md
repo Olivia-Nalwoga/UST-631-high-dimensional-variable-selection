@@ -11,7 +11,7 @@ This question matters because high-dimensional datasets often contain redundant 
 ## 2. Hypothesis
 
 - **Null Hypothesis (H₀):**  
-  TThere is no meaningful difference in predictive performance between the reduced and full models (reduced MSE − full MSE ≤ 0).
+  There is no meaningful difference in predictive performance between the reduced and full models (reduced MSE − full MSE ≤ 0).
 
 - **Alternative Hypothesis (H₁):**  
   The reduced model performs worse than the full model (reduced MSE − full MSE > 0).
@@ -73,7 +73,7 @@ While the reduced model has slightly higher error, the magnitude of this differe
 
 ### Permutation Test Results
 
-The permutation test produced a p-value of 0.143, which exceeds the 0.05 significance level. Therefore, we fail to reject the null hypothesis that the observed difference in predictive performance between the reduced and full models could have occurred by chance.
+The permutation test produced a p-value of 0.278, which exceeds the 0.05 significance level. Therefore, we fail to reject the null hypothesis that the observed difference in predictive performance between the reduced and full models could have occurred by chance.
 
 This suggests that the reduced model does not exhibit a statistically significant loss in predictive accuracy relative to the full model.
 
