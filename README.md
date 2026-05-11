@@ -11,7 +11,7 @@ This question matters because high-dimensional datasets often contain redundant 
 ## 2. Hypothesis
 
 - **Null Hypothesis (H₀):**  
-  The reduced model performs as well as or better than the full model (reduced MSE − full MSE ≤ 0).
+  TThere is no meaningful difference in predictive performance between the reduced and full models (reduced MSE − full MSE ≤ 0).
 
 - **Alternative Hypothesis (H₁):**  
   The reduced model performs worse than the full model (reduced MSE − full MSE > 0).
